@@ -1,0 +1,14 @@
+[
+    {
+        "name": "burger",
+        "expiry": "11/11/21"
+    },
+    {
+        "name": "milk",
+        "expiry": "25/11/03"
+    },
+    {
+        "name": "yoghurt",
+        "expiry": "11/11/25"
+    }
+]
