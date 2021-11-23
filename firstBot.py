@@ -26,6 +26,11 @@ from storage import Storage
 # Import constants from config.py file
 import config
 
+# Import OS to manage PORT stuff
+import os
+
+PORT = int(os.environ.get('PORT', 5000))
+
 # Create new itemList
 foodList = ItemList()
 
@@ -97,5 +102,8 @@ caps_handler = CommandHandler('caps', caps)
 dispatcher.add_handler(caps_handler)
 
 # Start the Bot
+    
+updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=config.API_KEY)
+updater.bot.setWebhook("https://lit-cove-82245.herokuapp.com/" + config.API_KEY)
 
-updater.start_polling()
+updater.idle()
