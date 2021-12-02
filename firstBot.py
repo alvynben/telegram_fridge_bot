@@ -158,8 +158,6 @@ dispatcher.add_handler(caps_handler)
 
 # Start the Bot
     
-# updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=config.API_KEY, webhook_url="https://lit-cove-82245.herokuapp.com/" + config.API_KEY)
+updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=config.API_KEY, webhook_url="https://lit-cove-82245.herokuapp.com/" + config.API_KEY)
  
-# updater.idle()
-
-updater.start_polling()
+updater.idle()
