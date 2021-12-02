@@ -9,7 +9,6 @@ DATABASE_URL = os.environ['DATABASE_URL']
 class Storage:
     def __init__(self):
         self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-        # self.conn = psycopg2.connect("dbname=alvynben user=alvynben password=test123")
         self.cur = self.conn.cursor()
         self.cur.execute('CREATE TABLE IF NOT EXISTS public.fridgedata (id bigserial NOT NULL, name varchar NOT NULL, expiry timestamp NOT NULL, PRIMARY KEY (id))')
     

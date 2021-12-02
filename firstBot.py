@@ -74,6 +74,7 @@ def add(update: Update, context: CallbackContext):
     newItem = FoodItem(name,expiry)
     foodList.add(newItem)
     storage.add(newItem)
+    storage.save()
 
     updatedFoodListText = foodList.getListAsString()
     successText = "Great. Fridget looks like this now:\n"
