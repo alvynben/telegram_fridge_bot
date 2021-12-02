@@ -43,8 +43,9 @@ class Storage:
 # burger = FoodItem("burger", "11/11/2021")
 # chicken = FoodItem("chicken", "10/10/2021")
 # dog = FoodItem("dog", "13/12/2021")
+# cat = FoodItem("cat", "10/10/2020")
 
-# storage.add(dog)
+# storage.add(cat)
 
 # storage.save()
 
