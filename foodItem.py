@@ -1,9 +1,14 @@
+from datetime import datetime
 from dateutil.parser import parse
 
 class FoodItem:
-    def __init__(self, name, expiry):
+    def __init__(self, name, expiry : str):
         self.name = name
         self.expiry = parse(expiry, dayfirst=True)
+    
+    def __init__(self, name, expiry : datetime):
+        self.name = name
+        self.expiry = expiry
     
     def getExpiry(self):
         print(self.expiry)

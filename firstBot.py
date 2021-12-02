@@ -29,15 +29,18 @@ import config
 # Import OS to manage PORT stuff
 import os
 
+# Connect to database
+import psycopg2
+
 PORT = int(os.environ.get('PORT', 5000))
+DATABASE_URL = os.environ['DATABASE_URL']
 
 # Create new itemList
 foodList = ItemList()
 
 # Load stored items into itemList
 storage = Storage()
-for item in storage.load():
-    foodList.add(FoodItem(item['name'],item['expiry']))
+storage.initialise_foodList(foodList)
 
 # Set up reference to bot using API
 updater = Updater(token=config.API_KEY, use_context=True)
@@ -70,7 +73,7 @@ def add(update: Update, context: CallbackContext):
 
     newItem = FoodItem(name,expiry)
     foodList.add(newItem)
-    storage.save(foodList.getList())
+    storage.add(newItem)
 
     updatedFoodListText = foodList.getListAsString()
     successText = "Great. Fridget looks like this now:\n"

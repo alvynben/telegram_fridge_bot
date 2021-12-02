@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "alvynbendb",
+            "database": "alvynben",
+            "username": "alvynben",
+            "password": "test123"
+        }
+    ]
+}
