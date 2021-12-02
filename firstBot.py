@@ -85,6 +85,19 @@ add_handler = CommandHandler('add', add)
 dispatcher.add_handler(add_handler)
 
 #################################
+#  Handles any '/list' commands  #
+#################################
+
+def listnow(update: Update, context: CallbackContext):
+    updatedFoodListText = foodList.getListAsString()
+    successText = "Fridget looks like this now:\n"
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text=successText+updatedFoodListText)
+
+listnow_handler = CommandHandler('list', listnow)
+dispatcher.add_handler(listnow_handler)
+
+#################################
 #    Handles any other text     #
 #################################
 
