@@ -11,9 +11,17 @@ PICK_ITEM = 0
 def rm_wrapper(foodList):
     def rm(update: Update, context: CallbackContext) -> int:
         """Finds and displays a list of possible items user may want to remove, and asks to pick the one to remove"""
-        name = context.args[0] # TODO: Handle incorrect input
+        try:
+            name = context.args[0]
+        except:
+            name = ''
 
         matchingItems = foodList.getMatchingItemsByName(name)
+        
+        if not matchingItems:
+            failureText = "No matching items were found."
+            context.bot.send_message(chat_id=update.effective_chat.id, text=failureText)
+            return ConversationHandler.END
         
         keyboard = []
         for item in matchingItems:
