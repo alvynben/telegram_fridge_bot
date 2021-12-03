@@ -33,6 +33,7 @@ from command.unknownCommand import unknown_wrapper
 
 PORT = int(os.environ.get('PORT', 5000))
 API_KEY = os.environ['TELEGRAM_FRIDGE_API_KEY']
+ENVIRONMENT = os.environ['TELEGRAM_FRIDGE_ENVIRONMENT']
 
 # Create new itemList
 foodList = ItemList()
@@ -71,9 +72,8 @@ caps_handler = CommandHandler('caps', caps_wrapper())
 dispatcher.add_handler(caps_handler)
 
 # Start the Bot
-    
-# updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=API_KEY, webhook_url="https://lit-cove-82245.herokuapp.com/" + API_KEY)
- 
-# updater.idle()
-
-updater.start_polling()
+if ENVIRONMENT == "development":
+    updater.start_polling()
+else:
+    updater.start_webhook(listen="0.0.0.0",port=int(PORT),url_path=API_KEY, webhook_url="https://lit-cove-82245.herokuapp.com/" + API_KEY) 
+    updater.idle()
