@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext, CommandHandler
 from data.foodItem import FoodItem
+import re
 
 #################################
 #  Handles any '/add' commands  #
@@ -12,7 +13,8 @@ def add_wrapper(foodList):
             name = ''
             expiry = ''
             for arg in args:
-                if any(char.isdigit() for char in arg):
+                if re.match(r'\d{2,4}-\d{2}-\d{2}',arg):
+                    print(arg)
                     expiry=arg
                 else:
                     name += f"{arg} "
