@@ -1,5 +1,5 @@
-from foodItem import FoodItem
-from storage import Storage
+from data.foodItem import FoodItem
+from data.storage import Storage
 
 class ItemList:
     def __init__(self):

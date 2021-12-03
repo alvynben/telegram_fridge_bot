@@ -1,5 +1,5 @@
 import json
-from foodItem import FoodItem
+from data.foodItem import FoodItem
 import psycopg2
 import os
 
