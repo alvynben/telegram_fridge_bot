@@ -8,7 +8,16 @@ from data.foodItem import FoodItem
 def add_wrapper(foodList):
     def add(update: Update, context: CallbackContext):
         try:
-            name, expiry = context.args
+            args = context.args
+            name = ''
+            expiry = ''
+            for arg in args:
+                if any(char.isdigit() for char in arg):
+                    expiry=arg
+                else:
+                    name += f"{arg} "
+            name = name.strip()
+            expiry = expiry.strip()
         except:
             failureText = "Sorry, your item is formatted wrongly. It should be formatted as such:\n"
             correctFormat = "\n/add burger 2021-12-13"
