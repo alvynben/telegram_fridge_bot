@@ -38,6 +38,10 @@ class ItemList:
         newList = self.sortBy(sortType)
         return "\n".join([str(food) for food in newList])
     
+    def getMatchingItemsByName(self,name):
+        matchingItems = self.storage.getMatchingItemsByName(name)
+        return matchingItems
+    
     def getMatchingItemsByNameAsString(self,name):
         matchingItems = self.storage.getMatchingItemsByName(name)
         finalString = ''

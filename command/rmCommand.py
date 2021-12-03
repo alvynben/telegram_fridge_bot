@@ -1,5 +1,6 @@
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, ConversationHandler
+from datetime import datetime
 
 #################################
 #  Handles any '/rm' commands  #
@@ -12,10 +13,15 @@ def rm_wrapper(foodList):
         """Finds and displays a list of possible items user may want to remove, and asks to pick the one to remove"""
         name = context.args[0] # TODO: Handle incorrect input
 
-        matchingItemsText = foodList.getMatchingItemsByNameAsString(name)
-        headerText = "Which item would you like to remove?:\n"
+        matchingItems = foodList.getMatchingItemsByName(name)
+        
+        keyboard = []
+        for item in matchingItems:
+            keyboard.append([InlineKeyboardButton(f"{item['name']} | {item['expiry'].strftime('%d %b %Y')}", callback_data=item['id'])])
+        reply_markup = InlineKeyboardMarkup(keyboard)
 
-        context.bot.send_message(chat_id=update.effective_chat.id, text=headerText+matchingItemsText)
+        headerText = "Which item would you like to remove?:\n"
+        update.message.reply_text(headerText,reply_markup=reply_markup)
 
         return PICK_ITEM
     return rm
@@ -23,7 +29,9 @@ def rm_wrapper(foodList):
 def pick_item_wrapper(foodList):
     def pick_item(update: Update, context: CallbackContext) -> int:
         """Tries to remove item, and informs user about success/failure"""
-        index = update.message.text
+        query = update.callback_query
+        query.answer()
+        index = query.data
         removedItem = foodList.getByIndex(index)
         
         if (removedItem == 0 or not foodList.removeByIndex(index)):

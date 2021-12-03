@@ -6,7 +6,7 @@ from telegram import Update
 from telegram.ext import CallbackContext  
 
 # Handles Commands / Messages
-from telegram.ext import CommandHandler, MessageHandler, ConversationHandler
+from telegram.ext import CommandHandler, MessageHandler, ConversationHandler, CallbackQueryHandler
 
 # Filters messages for useful data
 from telegram.ext import Filters
@@ -56,7 +56,7 @@ dispatcher.add_handler(add_handler)
 rm_handler = ConversationHandler(
     entry_points=[CommandHandler('rm',rm_wrapper(foodList))],
     states={
-        PICK_ITEM: [MessageHandler(Filters.text & ~Filters.command, pick_item_wrapper(foodList))],
+        PICK_ITEM: [CallbackQueryHandler(pick_item_wrapper(foodList))],
     },
     fallbacks=[CommandHandler('cancel',cancel_wrapper())],
 )
